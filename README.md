@@ -1,23 +1,3 @@
-<p align="center">
-  <a href="" rel="noopener">
- <img width=200px height=200px src="https://i.imgur.com/6wj0hh6.jpg" alt="Project logo"></a>
-</p>
-
-<h3 align="center">VSynth</h3>
-
-<div align="center">
-
-[![Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![GitHub Issues](https://img.shields.io/github/issues/ex3c-dev/vsynth)](https://github.com/ex3c-dev/vsynth/issues)
-[![License](https://img.shields.io/github/license/ex3c-dev/vsynth)](/LICENSE)
-
-</div>
-
----
-
-<p align="center"> A basic digital audio workstation (DAW) to create music using algorithms written in haskell.
-    <br> 
-</p>
 
 ## 📝 Table of Contents
 
