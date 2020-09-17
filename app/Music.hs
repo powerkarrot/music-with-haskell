@@ -24,17 +24,17 @@ arpeggio key tscale dur vol =
         notes = makeNote chordDone dur vol
     in makeLine notes
 
-triad :: Semitone -> Scale Semitone -> Beats -> Volume -> [Pulse]
+--triad :: Semitone -> Scale Semitone -> Beats -> Volume -> [Pulse]
 triad key tscale dur vol = 
     let scale = makeScale tscale key
         v = take (length chord) $ repeat vol
         d = take (length chord) $ repeat dur
         chordDone = [(intervals scale) !! x | x <- chord]
         notes = makeNote chordDone d v
-    in join [(makeLine ([notes !! 0])) |:|  (makeLine ([notes !! 1])) |:| (makeLine ([notes !! 2]))]
+    in join [(([notes !! 0])) ++  (([notes !! 1])) ++ (([notes !! 2]))]
 
 --rules for minor progression
-chordInMinorProg :: Int -> Key -> Octave -> [Pulse]
+--chordInMinorProg :: Int -> Key -> Octave -> [Pulse]
 chordInMinorProg index k octave 
     | index == 5 || index == 6 = triad i (majorScale A octave) qn volume
     | index == 1 || index == 4 = triad i (minorScale A octave) qn volume 
@@ -46,7 +46,7 @@ chordInMinorProg index k octave
      i = mapProgToKey k index octave
 
 --rules for major progression
-chordInMajorProgression :: Int -> Key -> Octave -> [Pulse]
+--chordInMajorProgression :: Int -> Key -> Octave -> [Pulse]
 chordInMajorProgression index k octave 
     | index == 1 || index == 4 || index == 5 = triad i (majorScale A octave) qn volume
     | index == 2 || index == 3 || index == 6 = triad i (minorScale A octave) qn volume 
@@ -95,8 +95,8 @@ walkingBass scale octave num_notes voices = do
     return $ makeNote line (replicate npm 1) (replicate npm 0.1) 
 
 -- Function that creates a progression 
-createProgressionBar :: (Int -> Key ->  Octave -> [Pulse]) -> [Progression] -> Key  -> Octave-> [Pulse]
-createProgressionBar f prog key octave = join [join $ replicate npm $ f i key octave| i <- prog] 
+--createProgressionBar :: (Int -> Key ->  Octave -> [Pulse]) -> [Progression] -> Key  -> Octave-> [Pulse]
+createProgressionBar f prog key octave = makeLine $ join [join $ replicate npm $ f i key octave| i <- prog] 
 
 --Let a voice follow over a chord Progression
 --aqui: estructura para Bars
