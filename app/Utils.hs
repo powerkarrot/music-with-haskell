@@ -4,6 +4,8 @@ import System.Random
 import Control.Monad.Random
 import Control.Lens
 import Data.Bool
+import Data.List (transpose)
+import Control.Applicative
 
 -- Enum Cycling. Useful to cycle data Key which derives Enum
 next :: (Eq a, Enum a, Bounded a) => a -> a
@@ -47,3 +49,9 @@ shuffle x = if length x < 2 then return x else do
 --Function to replace elements in list that fulfill passed-on boolean expression
 filterReplace :: Traversable t => (Int -> Bool) -> t a -> a -> t a
 filterReplace f line r = over  (elements (f)) (const r) line
+
+--infix function // operator
+(|:|) :: (Num a) => [a] -> [a] -> [a]
+a |:| b = zipWith (+) a b
+
+infixr 5 |:|

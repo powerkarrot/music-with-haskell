@@ -80,9 +80,3 @@ makeLine notes  = concat [note n | n <- notes]
 makeNote :: [Semitone] -> [Beats] -> [Volume] -> [Note]
 makeNote line dur vol = [Note x y z |(x, y, z) <- zip3 line dur vol]
 
-
--- applicative Notation
--- use: f <$> a <*> b <*> c <*> d <*> ... (= zipWith f a b c d ...)
-
-(<*>) :: [a -> b] -> [a] -> [b]
-(<*>) = zipWith ($)
