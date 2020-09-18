@@ -31,14 +31,14 @@ triad key tscale dur vol =
         d = take (length chord) $ repeat dur
         chordDone = [(intervals scale) !! x | x <- chord]
         notes = makeNote chordDone d v
-    in join [(([notes !! 0])) ++  (([notes !! 1])) ++ (([notes !! 2]))]
+    in concat [zipWith3 (\x y z -> x + y + z) (makeLine ([notes !! 0])) (makeLine ([notes !! 1])) (makeLine ([notes !! 2]))]
 
 --rules for minor progression
---chordInMinorProg :: Int -> Key -> Octave -> [Pulse]
-chordInMinorProg index k octave 
-    | index == 5 || index == 6 = triad i (majorScale A octave) qn volume
-    | index == 1 || index == 4 = triad i (minorScale A octave) qn volume 
-    | index == 2 || index == 7 = triad i (diminishedScale A octave) qn volume
+chordInMinorProg :: Int -> Key -> Octave -> Beats-> [Pulse]
+chordInMinorProg index k octave t
+    | index == 5 || index == 6 = triad i (majorScale A octave) t volume
+    | index == 1 || index == 4 = triad i (minorScale A octave) t volume 
+    | index == 2 || index == 7 = triad i (diminishedScale A octave) t volume
     | index == 3 = triad i (augmentedScale A octave) qn volume
     | otherwise =  error "Invalid chord progression"
     where 
@@ -46,11 +46,11 @@ chordInMinorProg index k octave
      i = mapProgToKey k index octave
 
 --rules for major progression
---chordInMajorProgression :: Int -> Key -> Octave -> [Pulse]
-chordInMajorProgression index k octave 
-    | index == 1 || index == 4 || index == 5 = triad i (majorScale A octave) qn volume
-    | index == 2 || index == 3 || index == 6 = triad i (minorScale A octave) qn volume 
-    | index == 7 = triad i (diminishedScale A octave) qn volume
+chordInMajorProgression :: Int -> Key -> Octave -> Beats -> [Pulse]
+chordInMajorProgression index k octave t
+    | index == 1 || index == 4 || index == 5 = triad i (majorScale A octave) t volume
+    | index == 2 || index == 3 || index == 6 = triad i (minorScale A octave) t volume 
+    | index == 7 = triad i (diminishedScale A octave) t volume
     | otherwise =  error "Invalid chord progression"
     where
      i :: Semitone
@@ -95,8 +95,10 @@ walkingBass scale octave num_notes voices = do
     return $ makeNote line (replicate npm 1) (replicate npm 0.1) 
 
 -- Function that creates a progression 
---createProgressionBar :: (Int -> Key ->  Octave -> [Pulse]) -> [Progression] -> Key  -> Octave-> [Pulse]
-createProgressionBar f prog key octave = makeLine $ join [join $ replicate npm $ f i key octave| i <- prog] 
+createProgressionBar :: (Int -> Key ->  Octave -> Beats ->  [Pulse]) -> [Progression] -> Key  -> Octave-> [Pulse]
+createProgressionBar f prog key octave = 
+    let rythm = [1,0.5, 1, 0.5, 0.5, 0.5]
+    in join [f i key octave x| i <- prog, x <- rythm] 
 
 --Let a voice follow over a chord Progression
 --aqui: estructura para Bars
@@ -115,7 +117,7 @@ voiceProgression chordProg tk octave majMin num_notes voices
         return $ createProgressionBar f chordProg tk octave
     where
      chords :: [Semitone]
-     chords =  [mapProgToKey tk index octave | index <- chordProg]
+     chords =   [ mapProgToKey tk index octave | index <- chordProg]
 
 -- creates different voices
 createBars :: [Progression] -> Key  -> Octave -> MajMin -> Int -> NumNotes -> IO [Pulse]
@@ -137,7 +139,7 @@ createBars chordSeq k octave majMin num_bars num_notes = do
         mel = fst c1 ++ snd c1 ++ fst c2 ++ snd c2
         mels = join $ replicate (num_bars) $ fst c1 ++ snd c1 ++ fst c2 ++ snd c2
 
-    return $ mels |:| chordpattern |:| b
+    return $ chordpattern |:| b |:|  mels
 
 
 createSheet:: FilePath -> [Progression] -> Key -> Octave -> MajMin -> Int -> NumNotes -> IO ()
