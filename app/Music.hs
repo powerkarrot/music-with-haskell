@@ -91,13 +91,18 @@ progressiveMelody scale octave num_notes voices = do
 walkingBass :: MonadRandom m => Scale Semitone -> Octave -> Int -> Voice -> m [Note]
 walkingBass scale octave num_notes voices = do
     l <- pickNRandom (intervals scale) 2
+
+    durs <- pickNSumCeiling [0.25, 0.5 .. 1] num_notes 
+    let c = if sum durs < (fromIntegral npm) then durs ++ [(fromIntegral npm) - sum durs ] else durs 
+
     let line = [(intervals scale !! 0)] ++ l ++ [intervals scale !! 0]
     return $ makeNote line (replicate npm 1) (replicate npm 0.1) 
 
 -- Function that creates a progression 
 createProgressionBar :: (Int -> Key ->  Octave -> Beats ->  [Pulse]) -> [Progression] -> Key  -> Octave-> [Pulse]
 createProgressionBar f prog key octave = 
-    let rythm = [1,0.5, 1, 0.5, 0.5, 0.5]
+    let rythm = [1,0.5, 1, 0.5, 0.5, 0.5] --dont let sum go over npm (4 usually)....
+    --let rythm = [1,2,1]
     in join [f i key octave x| i <- prog, x <- rythm] 
 
 --Let a voice follow over a chord Progression
