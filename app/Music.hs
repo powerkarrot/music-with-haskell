@@ -1,3 +1,4 @@
+{-# LANGUAGE ParallelListComp #-}
 module Music where 
 
 import Structures
@@ -6,6 +7,7 @@ import IOFunctions
 import Lib
 import Functions
 import Settings
+import Synthesizer
 import Control.Monad.Random
 import Control.Monad.Par
 import Data.List 

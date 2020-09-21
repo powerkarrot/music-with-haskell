@@ -7,4 +7,4 @@ main :: IO ()
 main = do
 
 
-    createSheet "/home/karrot/" axisOfAwesome A 0 Major 4 4
+    createSheet "/home/karrot/test.wav" axisOfAwesome A 0 Major 4 4

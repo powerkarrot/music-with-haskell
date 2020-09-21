@@ -1,7 +1,6 @@
 module Functions where
 
 import Structures
-import Settings
 
 --  Fetches Key value by indice
 getKey :: Int -> Key
@@ -48,35 +47,4 @@ augmentedScale root octave = createScale root augScale octave
 chordScale root octave = createScale root fifthsMScale octave
 
 fifthsMinorScale root octave = createScale root fifthsmScale octave
-
-beatDuration :: Seconds
-beatDuration =  60.0 / bpm
-
-beat :: Float -> Beats
-beat n = beatDuration * n
-
-f :: Semitone -> Hz
-f n = pitchStandard * (2 ** (1.0 / 12.0)) ** n
-
-note :: Note -> [Pulse]
-note n = map (* _vol n) $ freq (f (_semitone n)) (_dur n * beatDuration)
-
-freq :: Hz -> Seconds -> [Pulse]
-freq hz duration = zipWith3 (\x y z -> x * y * z) release attack output
-    where
-      step :: Hz
-      step = (hz * 2 * pi) / sampleRate  --A440 pitch standard
-      attack :: [Pulse]
-      attack = map (min 1.0) [0.0, 0.001 ..]
-      release :: [Pulse]
-      release = reverse $ take (length output) attack
-      output :: [Pulse]
-      output = map sin $ map (*step) [ 0.0 .. sampleRate * duration]
-
-makeLine :: [Note] -> [Pulse]
-makeLine notes  = concat [note n | n <- notes]
-
--- whatever this kind of 3 times list comprehension is called
-makeNote :: [Semitone] -> [Beats] -> [Volume] -> [Note]
-makeNote line dur vol = [Note x y z |(x, y, z) <- zip3 line dur vol]
 

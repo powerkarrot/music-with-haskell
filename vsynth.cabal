@@ -61,6 +61,7 @@ executable vsynth-exe
       Music
       Settings
       Structures
+      Synthesizer
       Utils
       Paths_vsynth
   hs-source-dirs:
