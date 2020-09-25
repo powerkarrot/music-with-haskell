@@ -1,4 +1,4 @@
-module Synthesizer where
+module Synthesizer (module Synthesizer, module Structures, module Settings, module Utils, module IOFunctions, module Functions) where
 
 import Structures
 import Settings
@@ -10,8 +10,10 @@ import Functions
 beatDuration :: Seconds
 beatDuration =  60.0 / bpm
 
+
 beat :: Float -> Beats
 beat n = beatDuration * n
+
 
 f :: Semitone -> Hz
 f n = pitchStandard * (2 ** (1.0 / 12.0)) ** n
@@ -23,6 +25,7 @@ amplify v = map (v *)
 
 sine :: Hz -> Samples
 sine hz =  hz * 2 * pi
+
 
 --frequency
 freq :: Hz -> Seconds -> [Pulse]
@@ -43,13 +46,6 @@ envelope line =  zipWith3 (\x y z -> x * y * z) release attack line
       release = reverse $ take (length line) attack
 
 
-makeLine :: [Note] -> [Pulse]
-makeLine notes  = concat [triangleWave n| n <- notes]
-
--- whatever this kind of 3 times list comprehension is called
-makeNote :: [Semitone] -> [Beats] -> [Volume] -> [Note]
-makeNote line dur vol = [Note x y z |(x, y, z) <- zip3 line dur vol]
-
 sample :: Note -> [Pulse]
 sample n = freq (f (_semitone n)) (_dur n * beatDuration)
 
@@ -69,6 +65,7 @@ failedSaw n = let a = envelope $ sample n
 squareWave :: Note -> [Pulse]
 squareWave n = envelope $ amplify (_vol n) $ map signum (sample n)
 
+
 triangleWave :: Note -> [Pulse]
 triangleWave n = let a = envelope $ sample n
 
@@ -77,13 +74,26 @@ triangleWave n = let a = envelope $ sample n
                      d = [if (x < 0) then negate (x * one) else  (x * one) | x <- a] 
               in  d
 
---test  waves
+isOdd :: Float -> Bool
+isOdd x = (mod (round x) 2) /= 0
+
+--meh
+triangleWave2 :: Note -> [Pulse]
+triangleWave2 n = let a = envelope $ sample n 
+                      d = [sum $ map (* x) [1.91]  | x <- a] 
+                      e = [sum $ map (* x) [0.0001, 0.0003 .. 0.0205]  | x <- a] 
+                      f = [x * 1.020005 | x <- a] -- map lol
+                  in amplify (_vol n ) d
+
+makeWave :: (Note -> [Pulse]) -> [Note] -> [Pulse]
+makeWave f notes  = concat [f n| n <- notes]
+
+
+-----------------------------------------soundtest functions------------------------------------------------------------
 test = let 
         maj = makeNote (intervals (majorScale A $ negate 2) ) (replicate  7 1) (replicate 7 (0.5))
 
-        b = makeLine maj
+        b = makeWave triangleWave2 maj
         in saveAsWav b "/home/karrot/test.wav"
-        --in b
  
-
-huch n =   [sum $ map (+ (i )) $(sample n) |  i <- [1 .. 10000]]
+test2 n =   [sum $ map (+ (i )) $(sample n) |  i <- [1 .. 10000]]

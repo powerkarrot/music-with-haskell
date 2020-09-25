@@ -2,6 +2,10 @@ module Functions where
 
 import Structures
 
+
+makeNote :: [Semitone] -> [Beats] -> [Volume] -> [Note]
+makeNote line dur vol = [Note x y z |(x, y, z) <- zip3 line dur vol]
+
 --  Fetches Key value by indice
 getKey :: Int -> Key
 getKey i = [A ..] !! (i `mod` 12)
@@ -25,8 +29,11 @@ makeScale scale i = Scale $ map (\x -> x + i) (intervals scale)
 transposeScale :: Scale Semitone -> Semitone -> Key-> Scale Semitone
 transposeScale scale i k = Scale $ map (\x -> x + (i - key k )) (intervals scale)
 
+transposeScale2 :: Scale Semitone -> Key-> Scale Semitone
+transposeScale2 scale i = Scale $ map (\x -> x + (key i - (intervals scale !! 0))) (intervals scale)
+
 -- Returns key from a chord progression indice
-mapProgToKey :: Key -> Int -> Octave -> Semitone
+mapProgToKey :: Key -> Position -> Octave -> Semitone
 mapProgToKey k indice octave =
     let scale = majorScale k octave
     in ((intervals scale) !! (indice -1)) -1

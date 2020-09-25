@@ -2,7 +2,7 @@ module Settings where
 import Structures
 
 volume :: Volume
-volume = 0.05
+volume = 0.07
 
 octave :: Octave
 octave = 0.0

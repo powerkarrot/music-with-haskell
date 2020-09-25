@@ -1,5 +1,6 @@
 module Utils where
 
+import Settings
 import System.Random
 import Control.Monad.Random
 import Control.Lens
@@ -18,6 +19,11 @@ prev = bool maxBound <$> pred <*> (/= minBound)
 listSumCeiling :: (Ord a, Num a) => [a] -> a -> [a]
 listSumCeiling list n = takeWhile (< n) $ scanl1 (+) list
 
+--Helper function to avoid exceeding maximum beats in bar
+listSum :: (Ord a, Num a) => [a] -> a -> [a]
+listSum list n = let l = takeWhile (< n) $ scanl1 (+) list
+                 in if sum l < (fromIntegral npm) then l ++ [(fromIntegral npm) - sum l ] else l 
+
 -- picks n random numbers from a list
 pickNRandom:: MonadRandom m => [a] -> Int -> m [a]
 pickNRandom line n = do
@@ -29,6 +35,12 @@ pickNSumCeiling:: MonadRandom m => [a] -> Int -> m [a]
 pickNSumCeiling line n = do
     list <- createRandomList (length line - 1) n 
     return $ [line !! x | x <- listSumCeiling (list) 4]
+
+-- Creates a r andom list such that sum is == n
+pickNSum:: MonadRandom m => [a] -> Int -> m [a]
+pickNSum line n = do
+    list <- createRandomList (length line - 1) n 
+    return $ [line !! x | x <- listSum (list) 4]
 
 createRandomList :: (MonadRandom m, Random a, Num a) => a -> Int -> m [a]
 createRandomList x n = do

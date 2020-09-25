@@ -1,5 +1,5 @@
 {-# LANGUAGE TemplateHaskell #-}
-module Structures where
+module Structures (module Structures, module Control.Lens) where
 
 import Control.Lens
 
@@ -12,7 +12,8 @@ type Semitone = Float
 type Beats = Float
 type Octave = Float
 type Volume = Float
-type Progression = Int
+type Position = Int
+type Progression = [Position]
 type NumNotes = Int
 type Interval = Float
 
@@ -43,7 +44,7 @@ instance Functor Scale where
     fmap f (Scale []) = Scale []
     fmap f (Scale (x:xs)) = (Scale ((f x):(fmap f xs)))
 
-chord :: [Progression]
+chord :: [Interval]
 chord = [0,2,4]
 
 majScale :: [Interval]
@@ -70,23 +71,23 @@ majPentagonic = [1,3,5,8,10]
 fifthsMScale:: [Interval]
 fifthsMScale = [1,3,8,13]
 
-twelveBarBlues :: [Progression]
+twelveBarBlues :: Progression
 twelveBarBlues = [1,1,1,1,4,4,1,1,5,4,1,5,5,4,1,5] 
 
-axisOfAwesome :: [Progression]
+axisOfAwesome :: Progression
 axisOfAwesome =  [1,5,6,4]
 
-pessimistic :: [Progression]
+pessimistic :: Progression
 pessimistic = [6,4,1,5]
 
-pop1 :: [Progression]
+pop1 :: Progression
 pop1 = [1,4,5,1]
 
-jazzCat :: [Progression]
+jazzCat :: Progression
 jazzCat = [2,5,1]
 
-pachelbel :: [Progression]
+pachelbel :: Progression
 pachelbel = [1,5,6,3,4,1,4,5]
 
-minorProg :: [Progression]
+minorProg :: Progression
 minorProg = [1,4,5,1]

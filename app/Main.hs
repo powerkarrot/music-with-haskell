@@ -1,7 +1,5 @@
 module Main where
 import Music
-import Structures
-import Control.Lens
 
 main :: IO ()
 main = do
