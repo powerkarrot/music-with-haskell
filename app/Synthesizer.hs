@@ -74,9 +74,6 @@ triangleWave n = let a = envelope $ sample n
                      d = [if (x < 0) then negate (x * one) else  (x * one) | x <- a] 
               in  d
 
-isOdd :: Float -> Bool
-isOdd x = (mod (round x) 2) /= 0
-
 --meh
 triangleWave2 :: Note -> [Pulse]
 triangleWave2 n = let a = envelope $ sample n 

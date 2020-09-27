@@ -1,7 +1,7 @@
 {-# LANGUAGE TemplateHaskell #-}
 module Structures (module Structures, module Control.Lens) where
 
-import Control.Lens
+import Control.Lens 
 
 type DeviceSpecifier = Maybe String
 type Seconds = Float

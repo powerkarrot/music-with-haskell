@@ -12,6 +12,7 @@ import Control.Applicative
 next :: (Eq a, Enum a, Bounded a) => a -> a
 next = bool minBound <$> succ <*> (/= maxBound)
 
+
 prev :: (Eq a, Enum a, Bounded a) => a -> a
 prev = bool maxBound <$> pred <*> (/= minBound)
 

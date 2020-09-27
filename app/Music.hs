@@ -2,6 +2,7 @@
 module Music (module Music, module Synthesizer) where 
 
 import Synthesizer
+
 import Control.Monad.Random
 import Control.Monad.Par
 import Data.List 
