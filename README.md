@@ -11,7 +11,7 @@
 - [Authors](#authors)
 - [Acknowledgments](#acknowledgement)
 
-## 🧐 About <a name = "about"></a>
+## About <a name = "about"></a>
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
