@@ -1,0 +1,30 @@
+? /com.docker.devenvironments.code/.stack-work/dist/x86_64-linux-tinfo6-libc6-pre232/Cabal-3.0.1.0/build/vsynth-exe/autogen/Paths_vsynth.hs
+: hash: c854659b8cbc71a756378806bd678f8023906c3af408cd3a8461d4c23bcdd592
+? /com.docker.devenvironments.code/.stack-work/dist/x86_64-linux-tinfo6-libc6-pre232/Cabal-3.0.1.0/build/vsynth-exe/autogen/cabal_macros.h
+: hash: 5c601de61119c7e1e4c22a614b42b9f3cb4ab475f476fa20d63a921a32901a58
+/com.docker.devenvironments.code/ChangeLog.md:
+  hash: 8457e96664bf535a937e4be0564e5996c3d965594fa693177bbb0e76771da6a2
+/com.docker.devenvironments.code/README.md:
+  hash: a6c30f9738a39643e5a3938bae6ae100473ab12edca1438ea4d5d94ce49ce63d
+/com.docker.devenvironments.code/app/Functions.hs:
+  hash: b5c3328367f89377fa05558df068a959a87a2b6cc96f0189f456d1f943d59b30
+/com.docker.devenvironments.code/app/IOFunctions.hs:
+  hash: d65e3725b547bb688c8499c70882d28a88675683731df1a5cdac931ea705d601
+/com.docker.devenvironments.code/app/Main.hs:
+  hash: e8c5f43b41ab8548a955fe2d87edc141a8c000be20fdade9cc7a581e3c89b33d
+/com.docker.devenvironments.code/app/Music.hs:
+  hash: a5dfc06e521fcd0c0f4370c8e4b655833c137beaca131d50ddfa8df55c80dfbf
+/com.docker.devenvironments.code/app/Settings.hs:
+  hash: 4a8ca10968f28cfa7333af46a6b95d8cafa3cd8999e614febfee6bc236f7b0e6
+/com.docker.devenvironments.code/app/Structures.hs:
+  hash: c5819215bbf22e57429ebf0b67aebb48fafbe0d67a467efb378da65de5f9472d
+/com.docker.devenvironments.code/app/Utils.hs:
+  hash: 5050df124970bceb4ed9f0b33f9825268677a5d1e418f9a346d1f3abbb3c3688
+/com.docker.devenvironments.code/package.yaml:
+  hash: 221d0b85af254e7e92dd5c7e976ca996ecb39e1b230d815baf9d9f68319dc4be
+/com.docker.devenvironments.code/vsynth.cabal:
+  hash: 0e67fe9d6f90c64ab95782226ca91f3be5bbfc223c0cba7ad6eb559ef3b0b1d0
+/home/vscode/.stack/programs/x86_64-linux/ghc-tinfo6-libc6-pre232-8.8.3/lib/ghc-8.8.3/include/ghcversion.h:
+  hash: 40d1b759f485f1cd5a54141a6412691ac2b76930507289a16a6a7b89b045b4d2
+/usr/include/stdc-predef.h:
+  hash: 64fdf694f7b3d51ec6c45c06dcb71ebbe9455742d3ea673012016668853d3bff

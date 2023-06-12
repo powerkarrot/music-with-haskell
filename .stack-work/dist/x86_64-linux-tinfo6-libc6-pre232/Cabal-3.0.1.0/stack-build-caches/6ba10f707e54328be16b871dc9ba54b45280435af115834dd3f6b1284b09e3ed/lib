@@ -1,0 +1,18 @@
+/com.docker.devenvironments.code/.stack-work/dist/x86_64-linux-tinfo6-libc6-pre232/Cabal-3.0.1.0/build/autogen/Paths_vsynth.hs:
+  hash: d740b28c78776b7551889e93218b9a7787acdfab0a56845772f23ac2cbc20991
+/com.docker.devenvironments.code/.stack-work/dist/x86_64-linux-tinfo6-libc6-pre232/Cabal-3.0.1.0/build/autogen/cabal_macros.h:
+  hash: 7adaf542211b93c56510ee28f7a6cc012b0703e3e3f2b1f0bbc5537b9f1513b0
+/com.docker.devenvironments.code/ChangeLog.md:
+  hash: 8457e96664bf535a937e4be0564e5996c3d965594fa693177bbb0e76771da6a2
+/com.docker.devenvironments.code/README.md:
+  hash: a6c30f9738a39643e5a3938bae6ae100473ab12edca1438ea4d5d94ce49ce63d
+/com.docker.devenvironments.code/package.yaml:
+  hash: 221d0b85af254e7e92dd5c7e976ca996ecb39e1b230d815baf9d9f68319dc4be
+/com.docker.devenvironments.code/src/Lib.hs:
+  hash: 11d6d255cb397fa45980eb516ea685146565d9de2108c4eea356ea41db8364be
+/com.docker.devenvironments.code/vsynth.cabal:
+  hash: 0e67fe9d6f90c64ab95782226ca91f3be5bbfc223c0cba7ad6eb559ef3b0b1d0
+/home/vscode/.stack/programs/x86_64-linux/ghc-tinfo6-libc6-pre232-8.8.3/lib/ghc-8.8.3/include/ghcversion.h:
+  hash: 40d1b759f485f1cd5a54141a6412691ac2b76930507289a16a6a7b89b045b4d2
+/usr/include/stdc-predef.h:
+  hash: 64fdf694f7b3d51ec6c45c06dcb71ebbe9455742d3ea673012016668853d3bff
